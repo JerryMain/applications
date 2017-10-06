@@ -1,5 +1,5 @@
 # name of your application
-APPLICATION = uC-cursus
+APPLICATION = audio-recorder
 
 # If no BOARD is found in the environment, use this default:
 BOARD ?= native
