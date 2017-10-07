@@ -8,6 +8,32 @@
 extern "C" {
 #endif
 
+char count = 0;
+
+void scuc_shield_button0(void *arg){
+    //(void)arg;
+    printf("button0\n");
+    if (count == 7) {
+        count = 0;
+    }
+    else {
+        count++;
+    }
+    scuc_shield_set_led_color((scuc_shield_t *)arg, count);
+}
+
+void scuc_shield_button1(void *arg){
+    (void)arg;
+    printf("button1\n");
+    if (count == 0) {
+        count = 7;
+    }
+    else {
+        count--;
+    }
+    scuc_shield_set_led_color((scuc_shield_t *)arg, count);
+}
+
 void scuc_shield_setup(scuc_shield_t *dev, const scuc_shield_params_t *params)
 {
     dev->led.red = params->led.red;
@@ -22,6 +48,10 @@ void scuc_shield_setup(scuc_shield_t *dev, const scuc_shield_params_t *params)
     gpio_init(dev->led.blue, GPIO_OD);
     // LED is low active, so set initially to HIGH
     gpio_set(dev->led.blue);
+    dev->buttons[0] = params->buttons[0];
+    dev->buttons[1] = params->buttons[1];
+    gpio_init_int(dev->buttons[0], GPIO_IN_PU, GPIO_FALLING, scuc_shield_button0, dev);
+    gpio_init_int(dev->buttons[1], GPIO_IN_PU, GPIO_FALLING, scuc_shield_button1, dev);
 }
 
 void scuc_shield_set_led_color(scuc_shield_t *dev, scuc_shield_led_color_t led_color)
