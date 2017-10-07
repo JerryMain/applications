@@ -1,1 +1,3 @@
-This is a repository for applications with RIOT
+# RIOT applications
+
+This is a personal repository with applications made for RIOT.
