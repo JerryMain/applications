@@ -16,12 +16,20 @@ extern "C" {
 #ifndef SCUC_SHIELD_PARAM_LED_B
 #define SCUC_SHIELD_PARAM_LED_B (GPIO_PIN(2, 2))
 #endif
+#ifndef SCUC_SHIELD_BUTTON0
+#define SCUC_SHIELD_BUTTON0 (GPIO_PIN(0, 0))
+#endif
+#ifndef SCUC_SHIELD_BUTTON1
+#define SCUC_SHIELD_BUTTON1 (GPIO_PIN(0, 1))
+#endif
 
 static const scuc_shield_params_t scuc_shield_params[] = {
     {
         .led.red = SCUC_SHIELD_PARAM_LED_R,
         .led.green = SCUC_SHIELD_PARAM_LED_G,
-        .led.blue = SCUC_SHIELD_PARAM_LED_B
+        .led.blue = SCUC_SHIELD_PARAM_LED_B,
+        .buttons[0] = SCUC_SHIELD_BUTTON0,
+        .buttons[1] = SCUC_SHIELD_BUTTON1
     }
 };
 

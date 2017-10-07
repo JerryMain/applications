@@ -15,6 +15,7 @@ typedef struct {
         gpio_t green;
         gpio_t blue;
     } led;
+    gpio_t buttons[2];
 } scuc_shield_params_t;
 
 typedef struct {
@@ -23,6 +24,7 @@ typedef struct {
         gpio_t green;
         gpio_t blue;
     } led;
+    gpio_t buttons[2];
 } scuc_shield_t;
 
 typedef enum {   // RGB binary coded
