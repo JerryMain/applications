@@ -2,7 +2,7 @@
 APPLICATION = audio-recorder
 
 # If no BOARD is found in the environment, use this default:
-BOARD ?= native
+BOARD ?= nucleo-f446
 
 # This has to be the absolute path to the RIOT base directory:
 RIOTBASE ?= $(CURDIR)/../..
@@ -14,5 +14,10 @@ CFLAGS += -DDEVELHELP
 
 # Change this to 0 show compiler invocation lines by default:
 QUIET ?= 1
+
+# Modules to include
+USEMODULE += shell
+USEMODULE += shell_commands
+USEMODULE += ps
 
 include $(RIOTBASE)/Makefile.include
