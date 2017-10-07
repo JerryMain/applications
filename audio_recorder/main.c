@@ -7,17 +7,18 @@
 
 scuc_shield_t shield;
 
-int toggle_led_r(int argc, char **argv)
+int set_led_color(int argc, char **argv)
 {
-    (void)argc;
-    (void)argv;
-    printf("toggle command\n");
-    scuc_shield_toggle_led_red(&shield);
+    if (argc != 2){
+        printf("incorrect number of arguments\n");
+        return -1;
+    }
+    scuc_shield_set_led_color(&shield, (argv[1][0] - '0'));
     return 0;
 }
 
 static const shell_command_t commands[] = {
-    {"toggle_r", "toggles the LED red color", toggle_led_r},
+    {"set_led", "Set LED to specified color", set_led_color},
     {NULL, NULL, NULL}
 };
 
@@ -26,8 +27,6 @@ int main(void)
     printf("Scintilla uC course application, running on a(n) %s board.\n", RIOT_BOARD);
 
     scuc_shield_setup(&shield, scuc_shield_params);
-
-    scuc_shield_toggle_led_red(&shield);
 
     char line_buf[SHELL_DEFAULT_BUFSIZE];
     shell_run(commands, line_buf, SHELL_DEFAULT_BUFSIZE);

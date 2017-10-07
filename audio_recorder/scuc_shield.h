@@ -25,9 +25,20 @@ typedef struct {
     } led;
 } scuc_shield_t;
 
+typedef enum {   // RGB binary coded
+    black = 0,   // 000
+    blue = 1,    // 001
+    green = 2,   // 010
+    cyan = 3,    // 011
+    red = 4,     // 100
+    magenta = 5, // 101
+    yellow = 6,  // 110
+    white = 7,   // 111
+} scuc_shield_led_color_t;
+
 void scuc_shield_setup(scuc_shield_t *dev, const scuc_shield_params_t *params);
 
-void scuc_shield_toggle_led_red(scuc_shield_t *dev);
+void scuc_shield_set_led_color(scuc_shield_t *dev, scuc_shield_led_color_t led_color);
 
 #ifdef __cplusplus
 }
