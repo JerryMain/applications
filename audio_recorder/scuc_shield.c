@@ -8,6 +8,21 @@
 extern "C" {
 #endif
 
+#if defined(CPU_NATIVE)
+// ADC functions are not defined for native
+int adc_init(adc_t line)
+{
+    (void)line;
+    return -1;
+}
+int adc_sample(adc_t line, adc_res_t res)
+{
+    (void)line;
+    (void)res;
+    return -1;
+}
+#endif
+
 char count = 0;
 
 void scuc_shield_button0(void *arg){
@@ -52,6 +67,8 @@ void scuc_shield_setup(scuc_shield_t *dev, const scuc_shield_params_t *params)
     dev->buttons[1] = params->buttons[1];
     gpio_init_int(dev->buttons[0], GPIO_IN_PU, GPIO_FALLING, scuc_shield_button0, dev);
     gpio_init_int(dev->buttons[1], GPIO_IN_PU, GPIO_FALLING, scuc_shield_button1, dev);
+    dev->adc = params->adc;
+    adc_init(dev->adc);
 }
 
 void scuc_shield_set_led_color(scuc_shield_t *dev, scuc_shield_led_color_t led_color)
