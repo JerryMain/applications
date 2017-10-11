@@ -17,8 +17,26 @@ int set_led_color(int argc, char **argv)
     return 0;
 }
 
+int get_adc_sample(int argc, char **argv)
+{
+    (void)argc;
+    (void)argv;
+    printf("Value: %d\n", adc_sample(shield.adc, ADC_RES_10BIT));
+    return 0;
+}
+
+int sample_and_set(int argc, char **argv)
+{
+    (void)argc;
+    (void)argv;
+    scuc_shield_set_led_color(&shield, (adc_sample(shield.adc, ADC_RES_6BIT)/8));
+    return 0;
+}
+
 static const shell_command_t commands[] = {
     {"set_led", "Set LED to specified color", set_led_color},
+    {"sample", "Print sample from ADC", get_adc_sample},
+    {"sample_set", "Set LED according to sample from ADC", sample_and_set},
     {NULL, NULL, NULL}
 };
 
